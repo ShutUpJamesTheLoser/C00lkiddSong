@@ -1,0 +1,28 @@
+local musicIds = { 
+    "129978203916047", 
+    "102193217451832", 
+    "138267602305311"
+}
+
+local function playMusic(musicId)
+    local musicCommand = ";music " .. musicId
+    local pitchCommand = ";pitch 0.3"
+    local volumeCommand = ";volume 10"
+
+    game:GetService("ReplicatedStorage").HDAdminClient.Signals.RequestCommand:InvokeServer(musicCommand)
+    game:GetService("ReplicatedStorage").HDAdminClient.Signals.RequestCommand:InvokeServer(pitchCommand)
+    game:GetService("ReplicatedStorage").HDAdminClient.Signals.RequestCommand:InvokeServer(volumeCommand)
+end
+
+while true do
+    for i, musicId in ipairs(musicIds) do
+        playMusic(musicId)
+        if i == 1 then
+            wait(25)
+        elseif i == 2 then
+            wait(23)
+        elseif i == 3 then
+            wait(30)
+        end
+    end
+end
